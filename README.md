@@ -30,7 +30,7 @@
 
 </div>
 
-**[BlogApp]** This is a Ruby on Rails project.
+**[Recipe-app]** This is a Ruby on Rails project.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -45,7 +45,7 @@
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-BlogApp is just a database for now
+Recipe App is just a database for now
 
 ### Prerequisites
 
@@ -58,7 +58,7 @@ Rails 7.07 or above
 
 Clone this repository to your desired folder: 
 
-git clone https://github.com/EmiLoKiJu/BlogApp.git
+git clone https://github.com/EmiLoKiJu/Recipe-app.git
 
 
 ### Install
