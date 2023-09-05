@@ -23,3 +23,10 @@
 body {
   overflow-y: auto;
 }
+
+.new_user,
+.mb-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
