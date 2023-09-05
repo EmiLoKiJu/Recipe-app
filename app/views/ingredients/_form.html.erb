@@ -1,0 +1,25 @@
+<section id='new-ingredient' class="flex items-center justify-center h-screen">
+  <%= form_with model: [@recipe, @ingredient], class: "max-w-3xl w-3/4 p-6 bg-white rounded shadow" do |form| %>
+    <% if ingredient.errors.any? %>
+      <div>
+        <h4 class="text-red-600"><%= pluralize(ingredient.errors.count, 'error') %> prohibited this object from being saved:</h4>
+        <ul>
+          <% @ingredient.errors.full_messages.each do |message| %>
+            <li class="text-red-600"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-4">
+      <%= form.label :food_id, class: "text-gray-700"  %> <br>
+      <%= form.collection_select :food_id, Food.all, :id, :name, {}, class: "border border-gray-300 rounded px-4 py-2 w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :quantity, class: "text-gray-700"  %> <br>
+      <%= form.number_field :quantity, class: "border border-gray-300 rounded px-4 py-2 w-full" %>
+    </div>
+    <div>
+      <%= form.submit class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded" %>
+    </div>
+  <% end %>
+</section>
