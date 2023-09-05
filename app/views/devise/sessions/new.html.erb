@@ -3,13 +3,13 @@
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="mb-4">
-      <%= f.label :email, class: "block font-medium text-gray-700" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input mt-1 block w-full rounded-md border-gray-300" %>
+      <div><%= f.label :email, class: "block font-medium text-gray-700" %></div>
+      <div><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input mt-1 block w-full rounded-md border-gray-300" %></div>
     </div>
 
     <div class="mb-4">
-      <%= f.label :password, class: "block font-medium text-gray-700" %>
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-input mt-1 block w-full rounded-md border-gray-300" %>
+      <div><%= f.label :password, class: "block font-medium text-gray-700" %></div>
+      <div><%= f.password_field :password, autocomplete: "current-password", class: "form-input mt-1 block w-full rounded-md border-gray-300" %></div>
     </div>
 
     <% if devise_mapping.rememberable? %>
@@ -20,7 +20,7 @@
     <% end %>
 
     <div class="text-center">
-      <%= f.submit "Log in", class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
+      <%= f.submit "Log in", class: "px-4 py-2 button1" %>
     </div>
   <% end %>
 

@@ -5,30 +5,30 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="mb-4">
-      <%= f.label :name, class: "block mb-1" %>
-      <%= f.text_field :name, autofocus: true, class: "block w-full border-gray-300 rounded-md py-2 px-3" %>
+      <div><%= f.label :name, class: "block mb-1" %></div>
+      <div><%= f.text_field :name, autofocus: true, class: "block w-full border-gray-300 rounded-md py-2 px-3" %></div>
     </div>
 
     <div class="mb-4">
-      <%= f.label :email, class: "block mb-1" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full border-gray-300 rounded-md py-2 px-3" %>
+      <div><%= f.label :email, class: "block mb-1" %></div>
+      <div><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full border-gray-300 rounded-md py-2 px-3" %></div>
     </div>
 
     <div class="mb-4">
-      <%= f.label :password, class: "block mb-1" %>
+      <div><%= f.label :password, class: "block mb-1" %></div>
       <% if @minimum_password_length %>
         <em class="text-sm text-gray-600">(<%= @minimum_password_length %> characters minimum)</em>
       <% end %>
-      <%= f.password_field :password, autocomplete: "new-password", class: "block w-full border-gray-300 rounded-md py-2 px-3" %>
+      <div><%= f.password_field :password, autocomplete: "new-password", class: "block w-full border-gray-300 rounded-md py-2 px-3" %></div>
     </div>
 
     <div class="mb-4">
-      <%= f.label :password_confirmation, class: "block mb-1" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "block w-full border-gray-300 rounded-md py-2 px-3" %>
+      <div><%= f.label :password_confirmation, class: "block mb-1" %></div>
+      <div><%= f.password_field :password_confirmation, autocomplete: "new-password", class: "block w-full border-gray-300 rounded-md py-2 px-3" %></div>
     </div>
 
     <div class="text-center">
-      <%= f.submit "Sign up", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md" %>
+      <%= f.submit "Sign up", class: "button1" %>
     </div>
   <% end %>
 

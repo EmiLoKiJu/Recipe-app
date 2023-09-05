@@ -23,3 +23,40 @@
 body {
   overflow-y: auto;
 }
+
+nav {
+  margin: 8px 1%;
+}
+
+.new_user,
+.mb-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dflex {
+  display: flex;
+}
+
+.flexcol {
+  flex-direction: column;
+}
+
+.spacebetween {
+  justify-content: space-between;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.alert-notice {
+  margin: 0 2%;
+}
+
+.m16 {
+  margin: 16px 0;
+}
