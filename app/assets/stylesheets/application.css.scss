@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+/* app/assets/stylesheets/application.scss */
+
+@import 'bootstrap';
+@import 'tailwind';
+@import 'font-awesome';
+
+body {
+  overflow-y: auto;
+}

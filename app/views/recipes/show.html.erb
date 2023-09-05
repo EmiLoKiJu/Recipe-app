@@ -1,0 +1,58 @@
+<section id='recipe' class="container mx-auto px-4">
+  <header class='text-center'>
+    <h1 class="text-3xl font-bold my-8">Recipe <%= @recipe.name %></h1>
+  </header>
+  <main class='recipe'>
+    <div>
+      <p>Preparation time: <%= @recipe.preparation_time %></p>
+      <br>
+      <p>Cooking time: <%= @recipe.cooking_time %></p>
+      <br>
+      <p><%= @recipe.description %></p>
+      <br>
+    </div>
+    <div >
+      <p><%= publish(@recipe) if can? :manage, @recipe %></p>
+    </div>
+  </main>
+  <div class='recipe__btn-wrap'>
+    <%= link_to 'Generate shopping list', general_shopping_list_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if can? :manage, @recipe %>
+    <%= link_to 'Add ingredient', new_recipe_ingredient_path(@recipe), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if can? :manage, @recipe %>
+  </div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left bg-white border border-gray-200 rounded-md">
+      <thead class="text-xs bg-gray-200 text-gray-700">
+        <tr>
+          <th scope="col" class="px-6 py-3 border-b">Food</th>
+          <th scope="col" class="px-6 py-3 border-b">Quantity</th>
+          <th scope="col" class="px-6 py-3 border-b">Value</th>
+          <th scope="col" class="px-6 py-3 border-b">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe.ingredients.each_with_index do |ingredient, index| %>
+          <tr class="<%= index.even? ? 'bg-gray-100' : 'bg-gray-50' %> border-b">
+            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.food.name %></td>
+            <td class="px-6 py-4"><%= ingredient.quantity %></td>
+            <td class="px-6 py-4"><%= number_to_currency(ingredient.value) %></td>
+            <td class="px-6 py-4 flex">
+              <% if can? :manage, @recipe %>
+                <%= link_to 'Modify', edit_ingredient_path(ingredient), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>&nbsp;
+                <%= button_to 'Delete', ingredient_path(ingredient), method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+              <% else %>
+                <p>n/a</p>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</section>

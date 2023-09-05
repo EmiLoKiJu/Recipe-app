@@ -1,0 +1,13 @@
+.recipe {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe__btn-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
+}
