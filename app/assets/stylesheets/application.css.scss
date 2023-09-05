@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ @import 'font-awesome';
+
+body {
+  overflow-y: auto;
+  background-color: black;
+  color: aquamarine;
+}
