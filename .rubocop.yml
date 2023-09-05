@@ -60,3 +60,7 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
+
+# Set the line ending style to CRLF
+Lint/EndOfLine:
+  EnforcedStyle: crlf
