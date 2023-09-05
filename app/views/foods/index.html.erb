@@ -1,0 +1,18 @@
+<section id='edit-food'>
+  <% if @foods.empty? %>
+    <div class='text-center'>
+      <h1 class="text-3xl font-bold my-8">Hello! We don't have any food!</h1>
+    </div>
+  <% else %>
+    <ul>
+      <% @foods.each do |food| %>
+        <li class='dflex food'>
+          <div class='data1'><%= food.name %></div>
+          <div class='data1'>measurement_unit: <%= food.measurement_unit %></div>
+          <div class='data1'>price: <%= food.price %></div>
+          <div class='data1'>quantity: <%= food.quantity %></div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

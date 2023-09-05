@@ -14,5 +14,6 @@ Rails.application.routes.draw do
       post 'publish'
     end
   end
+  resources :foods, only: [:index, :destroy]
   get '/general_shopping_list', to: 'shopping_list#index', as: 'general_shopping_list'
 end

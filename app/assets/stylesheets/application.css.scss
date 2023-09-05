@@ -30,3 +30,21 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.dflex {
+  display: flex;
+}
+
+.flexcol {
+  flex-direction: column;
+}
+
+.spacebetween {
+  justify-content: space-between;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
