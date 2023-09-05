@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # root "articles#index"
   root 'recipes#public'
   get '/public_recipes', to: 'recipes#public'
+  devise_scope :user do
+    get "/custom_sign_out" => "devise/sessions#destroy", as: :custom_destroy_user_session
+  end
 
   resources :recipes, shallow: true, except: [:edit, :update] do
     resources :ingredients, only: [:new, :create, :destroy, :edit, :update]

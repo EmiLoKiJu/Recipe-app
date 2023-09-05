@@ -24,6 +24,10 @@ body {
   overflow-y: auto;
 }
 
+nav {
+  margin: 8px 1%;
+}
+
 .new_user,
 .mb-2 {
   display: flex;
@@ -47,4 +51,8 @@ body {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+.alert-notice {
+  margin: 0 2%;
 }
