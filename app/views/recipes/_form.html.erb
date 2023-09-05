@@ -1,0 +1,40 @@
+<section id='new-recipe' class="flex items-center justify-center h-screen">
+  <%= form_with model: recipe, class: "max-w-3xl w-3/4 p-6 bg-white rounded shadow" do |form| %>
+    <% if recipe.errors.any? %>
+      <div>
+        <h4 class="text-red-600"><%= pluralize(recipe.errors.count, 'error') %> prohibited this object from being saved:</h4>
+        <ul>
+          <% recipe.errors.full_messages.each do |message| %>
+            <li class="text-red-600"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-4">
+      <%= form.label :name, class: "text-gray-700" %> <br>
+      <%= form.text_field :name, class: "border border-gray-300 rounded px-4 py-2 w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :preparation_time, class: "text-gray-700" %> <br>
+      <%= form.text_field :preparation_time, class: "border border-gray-300 rounded px-4 py-2 w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :cooking_time, class: "text-gray-700" %> <br>
+      <%= form.text_field :cooking_time, class: "border border-gray-300 rounded px-4 py-2 w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :description, class: "text-gray-700" %> <br>
+      <%= form.text_field :description, class: "border border-gray-300 rounded px-4 py-2 w-full" %>
+    </div>
+    <div class="mb-4">
+      <%= form.label :public, class: "text-gray-700" %><br>
+      <%= form.label :public, "Yes", value: "true", class: "mr-2" %>
+      <%= form.radio_button :public, true, checked: true, class: "mr-2" %>
+      <%= form.label :public, "No", value: "false", class: "mr-2" %>
+      <%= form.radio_button :public, false, class: "mr-2" %>
+    </div>
+    <div>
+      <%= form.submit "Add recipe", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded" %>
+    </div>
+  <% end %>
+</section>
