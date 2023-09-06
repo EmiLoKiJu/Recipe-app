@@ -15,7 +15,7 @@
         <% if @recipe.is_public %>
           <%= link_to "Unpublish", publish_recipe_path(@recipe), method: :post, class: "btn btn-danger" %>
         <% else %>
-          <%= link_to "Publish", publish_recipe_path(@recipe), method: :post, class: "btn btn-success" %>
+          <%= link_to "Public", publish_recipe_path(@recipe), method: :post, class: "btn btn-success" %>
         <% end %>
       <% end %>
     </div>
@@ -48,6 +48,7 @@
             <td><%= ingredient.food.price %></td>
             <td>
               <!-- Add actions for each food item if needed -->
+              <%= link_to 'Delete Food', class: 'btn btn-primary' %>
             </td>
           </tr>
         <% end %>
