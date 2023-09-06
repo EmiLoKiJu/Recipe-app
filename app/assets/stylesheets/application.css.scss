@@ -28,10 +28,14 @@ nav {
   margin: 8px 1%;
 }
 
-.new_user,
-.mb-2 {
+.new_user {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.mb-2,
+.form1 {
   align-items: center;
 }
 
@@ -59,4 +63,25 @@ nav {
 
 .m16 {
   margin: 16px 0;
+}
+
+.box1 {
+  margin: 16px 0;
+  width: 20%;
+  text-align: center;
+}
+
+.box2 {
+  width: 70%;
+  margin: 16px 0;
+}
+
+.box3 {
+  width: 70%;
+  margin: 20px 0;
+}
+
+.title1 {
+  font-size: 26px;
+  font-weight: bold;
 }

@@ -24,7 +24,7 @@
   document.getElementById('generate-shopping-list').addEventListener('click', function(event) {
     event.preventDefault();
     const selectedRecipeId = localStorage.getItem('selectedRecipeId');
-    this.href += '?selected_recipe_id=' + selectedRecipeId;
+    if (selectedRecipeId != null) this.href += '?selected_recipe_id=' + selectedRecipeId;
     window.location.href = this.href;
   });
 </script>
