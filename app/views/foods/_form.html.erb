@@ -1,0 +1,29 @@
+<!-- app/views/foods/new.html.erb -->
+
+<%= form_with(model: @food, url: foods_path, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :measurement_unit %>
+    <%= form.text_field :measurement_unit, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Create Food', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', foods_path, class: 'btn btn-secondary' %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_05_010532) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_215908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,11 +23,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_010532) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
-  end
-
-  create_table "ingredients", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "recipe_foods", force: :cascade do |t|
@@ -45,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_05_010532) do
     t.integer "preparation_time"
     t.integer "cooking_time"
     t.text "description"
-    t.boolean "public"
+    t.boolean "is_public"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
