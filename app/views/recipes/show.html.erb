@@ -5,19 +5,25 @@
   <main class='recipe'>
     <div>
       <p>Preparation time: <%= @recipe.preparation_time %></p>
-      <br>
+      <br/>
       <p>Cooking time: <%= @recipe.cooking_time %></p>
-      <br>
+      <br/>
       <p><%= @recipe.description %></p>
-      <br>
+      <br/>
     </div>
     <div >
-      <p><%= publish(@recipe) if can? :manage, @recipe %></p>
+      <% if can?(:manage, @recipe) %>
+        <% if @recipe.is_public %>
+          <%= link_to "Unpublish", publish_recipe_path(@recipe), method: :post, class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to "Publish", publish_recipe_path(@recipe), method: :post, class: "btn btn-success" %>
+        <% end %>
+      <% end %>
     </div>
   </main>
-  <div class='recipe__btn-wrap'>
-    <%= link_to 'Generate shopping list', general_shopping_list_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if can? :manage, @recipe %>
-    <%= link_to 'Add ingredient', new_recipe_ingredient_path(@recipe), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" if can? :manage, @recipe %>
+  <div>
+    <%= link_to 'Generate shopping list', general_shopping_list_path, class: "bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" if can? :manage, @recipe %>
+    <%= link_to 'Add Food to Recipe', new_recipe_food_path(recipe_id: @recipe.id), class: "bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" %>
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left bg-white border border-gray-200 rounded-md">
@@ -30,29 +36,18 @@
         </tr>
       </thead>
       <tbody>
-        <% @recipe.ingredients.each_with_index do |ingredient, index| %>
-          <tr class="<%= index.even? ? 'bg-gray-100' : 'bg-gray-50' %> border-b">
+        <% @recipe.recipe_foods.each do |ingredient| %>
+          <tr>
             <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.food.name %></td>
-            <td class="px-6 py-4"><%= ingredient.quantity %></td>
-            <td class="px-6 py-4"><%= number_to_currency(ingredient.value) %></td>
-            <td class="px-6 py-4 flex">
-              <% if can? :manage, @recipe %>
-                <%= link_to 'Modify', edit_ingredient_path(ingredient), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>&nbsp;
-                <%= button_to 'Delete', ingredient_path(ingredient), method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-              <% else %>
-                <p>n/a</p>
-              <% end %>
+            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.quantity %></td>
+            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.food.price %></td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <!-- Add actions for each food item if needed -->
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <br/>
 </section>

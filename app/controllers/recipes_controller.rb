@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[public show]
-  skip_authorize_resource only: :public
+  skip_before_action :authenticate_user!, only: %i[is_public show]
+  skip_authorize_resource only: :is_public
 
   def index
     @recipes = current_user.recipes
@@ -9,6 +9,7 @@ class RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     authorize! :read, @recipe
+    @ingredient = RecipeFood.find_by(id: params[:id], recipe: @recipe)
   end
 
   def create
@@ -34,7 +35,7 @@ class RecipesController < ApplicationController
   def public
     @totals = {}
 
-    @public_recipes = Recipe.where(public: true).includes(:foods, :user).order('created_at DESC')
+    @public_recipes = Recipe.where(is_public: true).includes(:foods, :user).order('created_at DESC')
     @public_recipes.each do |pub|
       total = 0
       RecipeFood.where(recipe_id: pub.id).each do |rec_food|
@@ -46,7 +47,7 @@ class RecipesController < ApplicationController
 
   def publish
     @recipe = Recipe.find(params[:id])
-    @recipe.public = !@recipe.public
+    @recipe.is_public = !@recipe.is_public
 
     redirect_to @recipe if @recipe.save
   end
@@ -54,6 +55,6 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :is_public)
   end
 end

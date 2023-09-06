@@ -5,7 +5,7 @@ class Ability
     # starting rules for all users
     can :read, Food
     can :read, Recipe do |recipe|
-      recipe.public == true
+      recipe.is_public == true
     end
 
     # additional permissions for logged in users
@@ -21,6 +21,6 @@ class Ability
 
     can :create, Food
     can :create, Recipe
-    can :manage, Ingredient
+    can :create, RecipeFood
   end
 end
