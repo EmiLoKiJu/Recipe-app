@@ -1,21 +1,23 @@
-<h2>Add Food to Recipe</h2>
+<div class="container mt-5">
+  <h2 class="mb-4">Add Food to Recipe</h2>
 
-<%= form_for @recipe_food do |f| %>
-  <div class="field">
-    <%= f.label :food_id, 'Food' %>
-    <%= f.collection_select :food_id, Food.all, :id, :name %>
-  </div>
+  <%= form_for @recipe_food, class: 'mb-4' do |f| %>
+    <div class="mb-3">
+      <%= f.label :food_id, 'Food', class: 'form-label' %>
+      <%= f.collection_select :food_id, Food.all, :id, :name, { prompt: 'Select a Food' }, class: 'form-select' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :quantity %>
-    <%= f.number_field :quantity %>
-  </div>
+    <div class="mb-3">
+      <%= f.label :quantity, class: 'form-label' %>
+      <%= f.number_field :quantity, class: 'form-control' %>
+    </div>
 
-  <%= f.hidden_field :recipe_id %>
+    <%= f.hidden_field :recipe_id %>
 
-  <div class="actions">
-    <%= f.submit 'Add Food', class: 'btn btn-primary' %>
-  </div>
-<% end %>
+    <div class="d-flex  mb-4">      
+      <%= f.submit 'Add Food', class: 'btn btn-primary me-4' %>
+      <%= link_to 'Back', :back, class: 'btn btn-success ms-4' %>
+    </div>
+  <% end %>
 
-<%= link_to 'Back', :back, class: 'btn btn-secondary' %>
+</div>
