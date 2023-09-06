@@ -8,14 +8,22 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new(food_params)
-    @food.user = current_user
+    @food = Food.new(post_params)
     if @food.save
-      redirect_to @food, notice: 'Food was successfully created.'
+      redirect_to foods_path, notice: 'Food was successfully created.'
     else
-      puts @food.errors.full_messages
-      redirect_to new_food_path
+      render :new
     end
+  end
+
+  def destroy
+    @food = Food.find(params[:id])
+  
+    # Find and delete associated recipe_foods records
+    RecipeFood.where(food_id: @food.id).destroy_all
+  
+    @food.destroy
+    redirect_back_or_to root_path
   end
 
   private
