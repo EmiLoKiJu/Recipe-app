@@ -1,21 +1,36 @@
-<section id='edit-food'>
+<section id='food-list' class="container my-4">
   <% if @foods.empty? %>
     <div class='text-center'>
       <h1 class="text-3xl font-bold my-8">Hello! We don't have any food!</h1>
     </div>
   <% else %>
-    <ul>
-      <% @foods.each do |food| %>
-        <li class='dflex food'>
-          <div class='data1'><%= food.name %></div>
-          <div class='data1'>measurement_unit: <%= food.measurement_unit %></div>
-          <div class='data1'>price: <%= food.price %></div>
-          <div class='data1'>quantity: <%= food.quantity %></div>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-  <div class="text-center my-4">
-    <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary' %>
+  <%# if can? :create, @foods %>
+  <div class="text-center d-flex justify-content-end my-4">
+    <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary ml-5 float-right mb-5' %>
   </div>
+<%# end %>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr class="bg-primary text-white">
+          <th scope="col">Food</th>
+          <th scope="col">Measurement Unit</th>
+          <th scope="col">Unit Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @foods.each do |food| %>
+          <tr>
+            <td><%= food.name %></td>
+            <td><%= food.measurement_unit %></td>
+            <td><%= food.price %></td>
+            <td>
+                <%= render partial: 'shared/delete', locals: { model: food, url: food_path(food) } %>   
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </section>
