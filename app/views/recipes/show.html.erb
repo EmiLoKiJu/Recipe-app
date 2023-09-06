@@ -1,17 +1,16 @@
 <section id='recipe' class="container mx-auto px-4">
   <header class='text-center'>
-    <h1 class="text-3xl font-bold my-8">Recipe <%= @recipe.name %></h1>
+    <h1 class="text-3xl font-bold my-4">Recipe <%= @recipe.name %></h1>
   </header>
   <main class='recipe'>
-    <div>
-      <p>Preparation time: <%= @recipe.preparation_time %></p>
-      <br/>
-      <p>Cooking time: <%= @recipe.cooking_time %></p>
-      <br/>
-      <p><%= @recipe.description %></p>
-      <br/>
+    <div class="card mb-4">
+      <div class="card-body">
+        <p class="card-text">Preparation time: <%= @recipe.preparation_time %></p>
+        <p class="card-text">Cooking time: <%= @recipe.cooking_time %></p>
+        <p class="card-text"><%= @recipe.description %></p>
+      </div>
     </div>
-    <div >
+    <div class="text-center mb-4">
       <% if can?(:manage, @recipe) %>
         <% if @recipe.is_public %>
           <%= link_to "Unpublish", publish_recipe_path(@recipe), method: :post, class: "btn btn-danger" %>
@@ -21,33 +20,33 @@
       <% end %>
     </div>
   </main>
-  <div>
+  <div class="text-center mb-4">
     <%= link_to 'Generate shopping list',
       general_shopping_list_path,
       id: 'generate-shopping-list-2',
       data: { recipe_id: @recipe.id },
-      class: 'bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded',
+      class: 'btn btn-primary',
       if: can?(:manage, @recipe)
     %>
-    <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" %>
+    <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary" %>
   </div>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left bg-white border border-gray-200 rounded-md">
-      <thead class="text-xs bg-gray-200 text-gray-700">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-light">
         <tr>
-          <th scope="col" class="px-6 py-3 border-b">Food</th>
-          <th scope="col" class="px-6 py-3 border-b">Quantity</th>
-          <th scope="col" class="px-6 py-3 border-b">Value</th>
-          <th scope="col" class="px-6 py-3 border-b">Actions</th>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Value</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @recipe.recipe_foods.each do |ingredient| %>
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.food.name %></td>
-            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.quantity %></td>
-            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.food.price %></td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td><%= ingredient.food.name %></td>
+            <td><%= ingredient.quantity %></td>
+            <td><%= ingredient.food.price %></td>
+            <td>
               <!-- Add actions for each food item if needed -->
             </td>
           </tr>
@@ -55,7 +54,6 @@
       </tbody>
     </table>
   </div>
-  <br/>
 </section>
 <script>
   document.getElementById('generate-shopping-list-2').addEventListener('click', function(event) {
