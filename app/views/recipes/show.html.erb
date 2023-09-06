@@ -22,8 +22,14 @@
     </div>
   </main>
   <div>
-    <%= link_to 'Generate shopping list', general_shopping_list_path, class: "bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" if can? :manage, @recipe %>
-    <%= link_to 'Add Food to Recipe', new_recipe_food_path(recipe_id: @recipe.id), class: "bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" %>
+    <%= link_to 'Generate shopping list',
+      general_shopping_list_path,
+      id: 'generate-shopping-list-2',
+      data: { recipe_id: @recipe.id },
+      class: 'bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded',
+      if: can?(:manage, @recipe)
+    %>
+    <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded" %>
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left bg-white border border-gray-200 rounded-md">
@@ -51,3 +57,11 @@
   </div>
   <br/>
 </section>
+<script>
+  document.getElementById('generate-shopping-list-2').addEventListener('click', function(event) {
+    event.preventDefault();
+    const recipeId = this.getAttribute('data-recipe-id');
+    localStorage.setItem('selectedRecipeId', recipeId);
+    window.location.href = this.href + '?selected_recipe_id=' + recipeId;
+  });
+</script>

@@ -3,7 +3,6 @@
     <h1 class="text-3xl font-bold my-8">Shopping List</h1>
   </header>
   <main class='flex justify-between'>
-    <span>Amount of items to buy: <%= @shopping_list.size %></span>
     <span>Total value of food needed: <%= number_to_currency(@shopping_list_value) %></span>
   </main>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg my-8">
@@ -16,11 +15,11 @@
         </tr>
       </thead>
       <tbody>
-        <% @shopping_list.each_with_index do |ingredient, index| %>
+        <% @shopping_list_items.each_with_index do |ingredient, index| %>
           <tr class="<%= index.even? ? 'bg-gray-100' : 'bg-gray-50' %> border-b">
-            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.food.name %></td>
-            <td class="px-6 py-4"><%= ingredient.quantity * ingredient.food.quantity %> <%= ingredient.food.measurement_unit %></td>
-            <td class="px-6 py-4"><%= number_to_currency(ingredient.quantity * ingredient.food.price) %></td>
+            <td class="px-6 py-4 whitespace-nowrap"><%= ingredient.name %></td>
+            <td class="px-6 py-4"><%= ingredient.quantity * ingredient.quantity %> <%= ingredient.measurement_unit %></td>
+            <td class="px-6 py-4"><%= number_to_currency(ingredient.quantity * ingredient.price) %></td>
           </tr>
         <% end %>
       </tbody>
