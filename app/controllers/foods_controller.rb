@@ -18,10 +18,10 @@ class FoodsController < ApplicationController
 
   def destroy
     @food = Food.find(params[:id])
-  
+
     # Find and delete associated recipe_foods records
     RecipeFood.where(food_id: @food.id).destroy_all
-  
+
     @food.destroy
     redirect_back_or_to root_path
   end
