@@ -3,12 +3,14 @@
     <div class='text-center'>
       <h1 class="text-3xl font-bold my-8">Hello! We don't have any food!</h1>
     </div>
+    <div class="text-center d-flex justify-content-center my-4">
+      <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary ml-5 float-right mb-5' %>
+    </div>
   <% else %>
-  <%# if can? :create, @foods %>
-  <div class="text-center d-flex justify-content-end my-4">
-    <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary ml-5 float-right mb-5' %>
-  </div>
-<%# end %>
+    <div class="text-center d-flex justify-content-end my-4">
+      <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary ml-5 float-right mb-5' %>
+    </div>
+  <%# end %>
 
     <table class="table table-bordered">
       <thead>
