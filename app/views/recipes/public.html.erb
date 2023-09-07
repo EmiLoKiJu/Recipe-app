@@ -9,48 +9,28 @@
     <% end %>
   </div>
 <% else %>
-  <h1 class="text-3xl font-bold mb-4 text-center mt-8 pb-2 border-b border-gray-300">Public Recipes</h1>
-  <% @public_recipes.each do |recipe| %>
-    <% if can? :read, recipe %>
-      <%= link_to recipe do %>
-        <div class="max-w-3xl mx-auto bg-gray-100 border border-gray-300 rounded-lg shadow my-4">
-          <div class="p-4 space-y-4">
-            <div class="flex justify-between items-center">
-              <h5 class="text-2xl font-bold mb-2 text-gray-800"><%= recipe.name %></h5>
-              <div class="flex flex-col items-end text-gray-600">
-                <div>
-                  <span>Total food items:</span>
-                  <span><%= recipe.foods.length %></span>
-                </div>
-                <div>
-                  <span>Total price:</span>
-                  <span class="text-green-500">$<%= @totals[recipe.id] %></span>
-                </div>
-              </div>
-            </div>
-            <p class="text-gray-600">By: <%= recipe.user.name %></p>
+  <div class="flex flex-col items-center">
+    <% @public_recipes.each do |recipe| %>
+      <div class="max-w-4xl w-11/12 m-4 p-6 bg-white border border-gray-200 rounded-lg shadow">
+        <div class="space-y-4 dflex spacebetween">
+          <div class="box1">
+            <%= link_to recipe_path(recipe) do %>
+              <div class="title1"><%= recipe.name %></div>
+            <% end %>
+            By: <%= recipe.user.name %>
           </div>
-        </div>
-      <% end %>
-    <% else %>
-      <div class="max-w-3xl mx-auto bg-gray-100 border border-gray-300 rounded-lg shadow my-4">
-        <div class="p-4 space-y-4">
-          <div class="flex justify-between items-center">
-            <h5 class="text-2xl font-bold mb-2 text-gray-800"><%= recipe.name %></h5>
-            <div class="flex flex-col items-end text-gray-600">
-              <div>
-                <span>Total food items:</span>
-                <span><%= recipe.foods.length %></span>
-              </div>
-              <div>
-                <span>Total price:</span>
-                <span class="text-green-500">$<%= @totals[recipe.id] %></span>
-              </div>
+          <div class="box3">
+            <div>
+              <span>Total food items:</span>
+              <span><%= recipe.foods.length %></span>
+            </div>
+            <div>
+              <span>Total price:</span>
+              <span class="text-green-500">$<%= @totals[recipe.id] %></span>
             </div>
           </div>
-          <p class="text-gray-600">By: <%= recipe.user.name %></p>
         </div>
       </div>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     get "/custom_sign_out" => "devise/sessions#destroy", as: :custom_destroy_user_session
   end
 
+  scope :recipes do
+    get '/:id/publish', to: 'recipes#publish', as: :publish_recipe
+  end
+
   resources :recipes, shallow: true, except: [:edit, :update] do
     member do
       post 'publish'
