@@ -17,9 +17,9 @@
       <tbody>
         <% @shopping_list_items.each_with_index do |ingredient, index| %>
           <tr class="<%= index.even? ? 'bg-white' : 'bg-light' %>">
-            <td><%= ingredient.name %></td>
-            <td><%= ingredient.quantity * ingredient.quantity %> <%= ingredient.measurement_unit %></td>
-            <td><%= number_to_currency(ingredient.quantity * ingredient.price) %></td>
+            <td><%= ingredient.food.name %></td>
+            <td><%= ingredient.quantity %> <%= ingredient.food.measurement_unit %></td>
+            <td><%= number_to_currency(ingredient.quantity*ingredient.food.price) %></td>
           </tr>
         <% end %>
       </tbody>

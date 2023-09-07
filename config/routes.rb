@@ -17,11 +17,15 @@ Rails.application.routes.draw do
     get '/:id/publish', to: 'recipes#publish', as: :publish_recipe
   end
 
+  scope :recipe_foods do
+    delete '/:id/delete', to: 'recipe_foods#destroy', as: :delete_recipe_food
+  end
+
   resources :recipes, shallow: true, except: [:edit, :update] do
     member do
       post 'publish'
     end
   end
   resources :foods, only: [:index, :destroy, :new, :create]
-  resources :recipe_foods, only: [:new, :create]
+  resources :recipe_foods, only: [:new, :create, :destroy]
 end
