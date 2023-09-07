@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'ingredients/new'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
   root 'recipes#public'
   get '/public_recipes', to: 'recipes#public'
   get '/general_shopping_list', to: 'shopping_list#index', as: 'general_shopping_list'
-
+  
   devise_scope :user do
     get "/custom_sign_out" => "devise/sessions#destroy", as: :custom_destroy_user_session
   end
