@@ -1,32 +1,46 @@
-<div class="max-w-md mx-auto bg-white border border-gray-200 rounded-lg shadow-lg p-6">
+<div class='text-center'>
+  <h1 class="text-3xl font-bold my-8">Add a new Food</h1>
+</div>
 
-  <%= form_with(model: @food, url: foods_path, local: true) do |form| %>
-    <div class="dflex flexcol form1">
-      <div class="field">
-        <%= form.label :name %>
-        <%= form.text_field :name, class: "form-control mt-1 block w-full rounded-md border-gray-300" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <%= form_with(model: @food, url: foods_path, local: true, class: "form-horizontal") do |form| %>
+      <div class="form-group">
+        <%= form.label :name, class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= form.text_field :name, class: "form-control", placeholder: "Enter Food Name" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= form.label :measurement_unit %>
-        <%= form.text_field :measurement_unit, class: "form-control mt-1 block w-full rounded-md border-gray-300" %>
+      <div class="form-group">
+        <%= form.label :measurement_unit, class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= form.text_field :measurement_unit, class: "form-control", placeholder: "Enter Measurement Unit" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= form.label :price %>
-        <%= form.number_field :price, class: "form-control mt-1 block w-full rounded-md border-gray-300" %>
+      <div class="form-group">
+        <%= form.label :price, class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= form.number_field :price, class: "form-control", placeholder: "Enter Price" %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= form.label :quantity %>
-        <%= form.number_field :quantity, class: "form-control mt-1 block w-full rounded-md border-gray-300" %>
+      <div class="form-group">
+        <%= form.label :quantity, class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= form.number_field :quantity, class: "form-control", placeholder: "Enter Quantity" %>
+        </div>
       </div>
 
-      <div class="actions">
-        <%= form.submit 'Create Food', class: "btn btn-primary" %>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= form.submit 'Create Food', class: "btn btn-primary" %>
+          <%= link_to 'Back', foods_path, class: 'btn btn-secondary' %>
+        </div>
       </div>
     <% end %>
-
-    <%= link_to 'Back', foods_path, class: 'btn btn-secondary' %>
+    </div>
   </div>
 </div>
