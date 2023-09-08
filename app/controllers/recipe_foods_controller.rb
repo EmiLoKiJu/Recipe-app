@@ -29,7 +29,7 @@ class RecipeFoodsController < ApplicationController
   def edit
     @recipe_food = RecipeFood.find(params[:id])
   end
-  
+
   def update
     @recipe_food = RecipeFood.find(params[:id])
     if @recipe_food.update(recipe_food_params)
