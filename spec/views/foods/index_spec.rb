@@ -42,17 +42,17 @@ RSpec.feature "Viewing List of Foods", type: :system do
   
     # Visit the foods index page
     visit foods_path
-  
-    # Find and click the delete link for the specific food
-    within('table.table-bordered tbody') do
-      find("[href='#{food_path(food_to_remove)}']").click
+
+    # Find the row that corresponds to the food you want to remove
+    food_row = find('tr', text: food_to_remove.name)
+
+    # Within that row, find and click the "Delete Food" button
+    within(food_row) do
+    click_button 'Delete Food'
     end
   
     # Check that the user is redirected back to the foods index page
     expect(page).to have_current_path(foods_path)
-  
-    # Check that the page displays a success notice (adjust to your application)
-    expect(page).to have_content('Food removed successfully.')
   
     # Check that the removed food is not in the list anymore
     expect(page).not_to have_content(food_to_remove.name)

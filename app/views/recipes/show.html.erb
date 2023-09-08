@@ -48,8 +48,9 @@
             <td><%= ingredient.quantity %></td>
             <td><%= (ingredient.quantity * ingredient.food.price / ingredient.food.quantity).round(2) %></td>
             <td>
-              <!-- Add actions for each food item if needed -->
-              <%= link_to 'Delete Food', class: 'btn btn-primary' %>
+              <%= form_with url: delete_recipe_food_path(ingredient), method: :delete do |form| %>
+                <%= form.submit 'Delete Food', data: { confirm: 'Are you sure you want to delete this food?' }, class: 'btn btn-danger' %>
+              <% end %>
             </td>
           </tr>
         <% end %>
