@@ -14,6 +14,10 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
+  def edit
+    @recipe_food = RecipeFood.find(params[:id])
+  end
+
   def destroy
     authorize! :destroy, @recipe_food
     @recipe_food = RecipeFood.find(params[:id])
