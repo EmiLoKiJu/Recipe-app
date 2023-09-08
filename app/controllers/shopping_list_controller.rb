@@ -6,7 +6,11 @@ class ShoppingListController < ApplicationController
     puts "Selected recipe ID: #{selected_recipe_id.inspect}"
     if selected_recipe_id.present?
       @recipe = Recipe.find(selected_recipe_id)
-      @shopping_list_items = @recipe.foods
+      @shopping_list_items = @recipe.recipe_foods
+      @total_value = @shopping_list_items.sum do |ingredient|
+        value = ingredient.quantity * ingredient.food.price / ingredient.food.quantity
+        value.round(2)
+      end
     else
       @shopping_list_items = []
     end
