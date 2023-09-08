@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_215908) do
     t.string "name"
     t.string "measurement_unit"
     t.decimal "price"
-    t.integer "quantity"
+    t.decimal "quantity"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

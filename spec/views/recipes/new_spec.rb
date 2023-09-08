@@ -14,8 +14,8 @@ RSpec.feature 'New Recipe Form', type: :system do
 
     # Fill in the form fields
     fill_in 'Name', with: 'New Recipe Name'
-    fill_in 'Preparation time', with: '30'
-    fill_in 'Cooking time', with: '45'
+    fill_in 'Preparation time', with: '0.5'
+    fill_in 'Cooking time', with: '0.75'
     fill_in 'Description', with: 'A delicious new recipe.'
     choose 'recipe_public_false'
 
@@ -24,8 +24,8 @@ RSpec.feature 'New Recipe Form', type: :system do
 
     # Check that the page displays the newly created recipe details
     expect(page).to have_content('New Recipe Name')
-    expect(page).to have_content('Preparation time: 30 minutes')
-    expect(page).to have_content('Cooking time: 45 minutes')
+    expect(page).to have_content('Preparation time: 0.5 hours')
+    expect(page).to have_content('Cooking time: 0.75 hours')
     expect(page).to have_content('A delicious new recipe.')
     expect(page).to have_content('Publish')
   end
