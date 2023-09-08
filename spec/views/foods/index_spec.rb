@@ -1,21 +1,15 @@
-RSpec.feature "Viewing List of Foods", type: :system do
-  # Load the fixture data if needed
+RSpec.feature 'Viewing List of Foods', type: :system do
   fixtures :users, :foods
 
   before do
-    # Sign in as a user
     user = users(:one)
     sign_in user if user # Assuming there's a user fixture for this test
   end
 
   scenario 'user views the list of foods' do
-    # Create some foods for testing (if needed)
     food1 = foods(:one)
     food2 = foods(:two)
-
-    # Visit the foods index page
     visit foods_path
-
     if page.has_no_css?('table.table-bordered')
       # No foods found
       expect(page).to have_content("Hello! We don't have any food!")
@@ -39,7 +33,7 @@ RSpec.feature "Viewing List of Foods", type: :system do
   scenario 'user removes a food from the list' do
     # Create a food for testing
     food_to_remove = foods(:one)
-  
+
     # Visit the foods index page
     visit foods_path
 
@@ -48,12 +42,12 @@ RSpec.feature "Viewing List of Foods", type: :system do
 
     # Within that row, find and click the "Delete Food" button
     within(food_row) do
-    click_button 'Delete Food'
+      click_button 'Delete Food'
     end
-  
+
     # Check that the user is redirected back to the foods index page
     expect(page).to have_current_path(foods_path)
-  
+
     # Check that the removed food is not in the list anymore
     expect(page).not_to have_content(food_to_remove.name)
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "RecipesIndex", type: :system do
+RSpec.feature 'RecipesIndex', type: :system do
   # Load the fixture data
   fixtures :users, :recipes, :foods, :recipe_foods
   before do

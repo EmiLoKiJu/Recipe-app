@@ -1,4 +1,4 @@
-RSpec.feature "ShoppingList", type: :system do
+RSpec.feature 'ShoppingList', type: :system do
   # Load the fixture data
   fixtures :users, :recipes, :foods, :recipe_foods
 

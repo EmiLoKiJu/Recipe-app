@@ -1,4 +1,4 @@
-RSpec.feature "Adding Food to Recipe", type: :system do
+RSpec.feature 'Adding Food to Recipe', type: :system do
   # Load the fixture data if needed
   fixtures :users, :recipes, :foods
 
