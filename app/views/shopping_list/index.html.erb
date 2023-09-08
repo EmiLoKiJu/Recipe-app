@@ -16,10 +16,11 @@
       </thead>
       <tbody>
         <% @shopping_list_items.each_with_index do |ingredient, index| %>
+          <% recipe_food, difference = ingredient %>
           <tr class="<%= index.even? ? 'bg-white' : 'bg-light' %>">
-            <td><%= ingredient.food.name %></td>
-            <td><%= ingredient.quantity %> <%= ingredient.food.measurement_unit %></td>
-            <td><%= number_to_currency(ingredient.quantity*ingredient.food.price/ingredient.food.quantity) %></td>
+            <td><%= recipe_food.food.name %></td>
+            <td><%= difference %> <%= recipe_food.food.measurement_unit %></td>
+            <td>$<%= difference * recipe_food.food.price %></td>
           </tr>
         <% end %>
       </tbody>

@@ -16,6 +16,7 @@
       <thead>
         <tr class="bg-primary text-white">
           <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
           <th scope="col">Measurement Unit</th>
           <th scope="col">Unit Price</th>
           <th scope="col">Actions</th>
@@ -25,8 +26,9 @@
         <% @foods.each do |food| %>
           <tr>
             <td><%= food.name %></td>
+            <td><%= food.quantity %></td>
             <td><%= food.measurement_unit %></td>
-            <td>$<%= (food.price / food.quantity).round(2) %></td>
+            <td>$<%= food.price %></td>
             <td>
               <%= form_with url: food_path(food), method: :delete do |form| %>
                 <%= form.submit 'Delete Food', class: 'btn btn-danger' %>

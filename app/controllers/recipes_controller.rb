@@ -41,7 +41,7 @@ class RecipesController < ApplicationController
     @public_recipes.each do |pub|
       total = 0
       RecipeFood.where(recipe_id: pub.id).each do |rec_food|
-        total += rec_food.quantity * rec_food.food.price / rec_food.food.quantity
+        total += rec_food.quantity * rec_food.food.price
       end
       @totals[pub.id] = total.round(2)
     end

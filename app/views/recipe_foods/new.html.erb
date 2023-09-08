@@ -9,7 +9,7 @@
 
     <div class="mb-3">
       <%= f.label :quantity, class: 'form-label' %>
-      <%= f.number_field :quantity, class: 'form-control' %>
+      <%= f.number_field :quantity, step: '0.01', class: 'form-control' %>
     </div>
 
     <%= f.hidden_field :recipe_id %>
