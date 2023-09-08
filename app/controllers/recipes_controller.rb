@@ -15,7 +15,7 @@ class RecipesController < ApplicationController
   def create
     @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
-      redirect_to recipes_path
+      redirect_to recipe_path(@recipe.id)
     else
       render :new, status: :unprocessable_entity
     end
@@ -41,9 +41,9 @@ class RecipesController < ApplicationController
     @public_recipes.each do |pub|
       total = 0
       RecipeFood.where(recipe_id: pub.id).each do |rec_food|
-        total += rec_food.quantity * rec_food.food.price
+        total += rec_food.quantity * rec_food.food.price / rec_food.food.quantity
       end
-      @totals[pub.id] = total
+      @totals[pub.id] = total.round(2)
     end
   end
 
