@@ -29,12 +29,12 @@
     <div class="mb-3">
       <%= form.label :public, class: "form-label text-gray-700" %><br>
       <div class="form-check form-check-inline">
-        <%= form.label :public, "Yes", class: "form-check-label mr-2" %>
-        <%= form.radio_button :public, true, checked: true, class: "form-check-input" %>
+        <%= form.label :public_true, "Yes", class: "form-check-label mr-2", for: "recipe_public_true" %>
+        <%= form.radio_button :public, true, checked: true, class: "form-check-input", id: "recipe_public_true" %>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.label :public, "No", class: "form-check-label mr-2" %>
-        <%= form.radio_button :public, false, class: "form-check-input" %>
+        <%= form.label :public_false, "No", class: "form-check-label mr-2", for: "recipe_public_false" %>
+        <%= form.radio_button :public, false, class: "form-check-input", id: "recipe_public_false" %>
       </div>
     </div>
     <div>

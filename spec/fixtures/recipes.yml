@@ -1,0 +1,15 @@
+one:
+  name: Spaghetti Carbonara
+  preparation_time: 15
+  cooking_time: 15
+  description: A classic Italian dish made with spaghetti, bacon, eggs, and cheese.
+  is_public: true
+  user: one
+
+two:
+  name: Chicken Alfredo
+  preparation_time: 10
+  cooking_time: 20
+  description: A creamy pasta dish made with fettuccine, chicken, and Alfredo sauce.
+  is_public: false
+  user: two

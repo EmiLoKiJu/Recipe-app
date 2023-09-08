@@ -23,7 +23,7 @@
       <div class="form-group">
         <%= form.label :price, class: "col-sm-2 control-label" %>
         <div class="col-sm-10">
-          <%= form.number_field :price, class: "form-control", placeholder: "Enter Price" %>
+          <%= form.number_field :price, step: '0.01', class: "form-control", placeholder: "Enter Price" %>
         </div>
       </div>
 

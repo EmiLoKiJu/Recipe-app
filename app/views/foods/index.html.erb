@@ -24,9 +24,11 @@
           <tr>
             <td><%= food.name %></td>
             <td><%= food.measurement_unit %></td>
-            <td><%= food.price %></td>
+            <td>$<%= food.price %></td>
             <td>
-                <%= render partial: 'shared/delete', locals: { model: food, url: food_path(food) } %>   
+              <%= form_with url: food_path(food), method: :delete do |form| %>
+                <%= form.submit 'Delete Food', class: 'btn btn-danger' %>
+              <% end %>
             </td>
           </tr>
         <% end %>

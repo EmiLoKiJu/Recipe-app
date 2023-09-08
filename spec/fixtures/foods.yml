@@ -1,0 +1,48 @@
+one:
+  name: Spaghetti
+  measurement_unit: grams
+  price: 0.5
+  quantity: 500
+  user: one
+
+two:
+  name: Bacon
+  measurement_unit: grams
+  price: 0.8
+  quantity: 200
+  user: one
+
+three:
+  name: Eggs
+  measurement_unit: pieces
+  price: 0.2
+  quantity: 6
+  user: one
+
+four:
+  name: Cheese
+  measurement_unit: grams
+  price: 1.0
+  quantity: 100
+  user: one
+
+five:
+  name: Fettuccine
+  measurement_unit: grams
+  price: 0.6
+  quantity: 500
+  user: two
+
+six:
+  name: Chicken
+  measurement_unit: grams
+  price: 1.2
+  quantity: 300
+  user: two
+
+seven:
+  name: Alfredo Sauce
+  measurement_unit: milliliters
+  price: 2.0
+  quantity: 250
+  user: two

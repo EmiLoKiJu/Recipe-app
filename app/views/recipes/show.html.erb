@@ -5,8 +5,8 @@
   <main class='recipe'>
     <div class="card mb-4">
       <div class="card-body">
-        <p class="card-text">Preparation time: <%= @recipe.preparation_time %></p>
-        <p class="card-text">Cooking time: <%= @recipe.cooking_time %></p>
+        <p class="card-text">Preparation time: <%= @recipe.preparation_time %> minutes</p>
+        <p class="card-text">Cooking time: <%= @recipe.cooking_time %> minutes</p>
         <p class="card-text"><%= @recipe.description %></p>
       </div>
     </div>
@@ -15,21 +15,21 @@
         <% if @recipe.is_public %>
           <%= link_to "Unpublish", publish_recipe_path(@recipe), method: :post, class: "btn btn-danger" %>
         <% else %>
-          <%= link_to "Public", publish_recipe_path(@recipe), method: :post, class: "btn btn-success" %>
+          <%= link_to "Publish", publish_recipe_path(@recipe), method: :post, class: "btn btn-success" %>
         <% end %>
       <% end %>
     </div>
   </main>
   <div class="d-flex justify-content-between mb-4">
-  <%= link_to 'Generate shopping list',
-    general_shopping_list_path,
-    id: 'generate-shopping-list-2',
-    data: { recipe_id: @recipe.id },
-    class: 'btn btn-primary',
-    if: can?(:manage, @recipe)
-  %>
-  <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary" %>
-</div>
+    <%= link_to 'Generate shopping list',
+      general_shopping_list_path,
+      id: 'generate-shopping-list-2',
+      data: { recipe_id: @recipe.id },
+      class: 'btn btn-primary',
+      if: can?(:manage, @recipe)
+    %>
+    <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary" %>
+  </div>
 
   <div class="table-responsive">
     <table class="table table-striped">
@@ -46,10 +46,11 @@
           <tr>
             <td><%= ingredient.food.name %></td>
             <td><%= ingredient.quantity %></td>
-            <td><%= ingredient.food.price %></td>
+            <td><%= (ingredient.quantity * ingredient.food.price / ingredient.food.quantity).round(2) %></td>
             <td>
-              <!-- Add actions for each food item if needed -->
-              <%= link_to 'Delete Food', class: 'btn btn-primary' %>
+              <%= form_with url: delete_recipe_food_path(ingredient), method: :delete do |form| %>
+                <%= form.submit 'Delete Food', data: { confirm: 'Are you sure you want to delete this food?' }, class: 'btn btn-danger' %>
+              <% end %>
             </td>
           </tr>
         <% end %>
