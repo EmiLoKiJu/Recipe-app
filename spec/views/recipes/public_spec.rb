@@ -1,4 +1,4 @@
-RSpec.feature "Public Recipes View", type: :system do
+RSpec.feature 'Public Recipes View', type: :system do
   # Load the fixture data
   fixtures :users, :recipes
 
@@ -11,7 +11,7 @@ RSpec.feature "Public Recipes View", type: :system do
   scenario 'user views public recipes' do
     # Create some public recipes for testing
     recipe1 = recipes(:one)
-    recipe2 = recipes(:two)
+    recipes(:two)
 
     visit public_recipes_path
 
