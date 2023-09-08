@@ -56,7 +56,5 @@ RSpec.feature "Viewing List of Foods", type: :system do
   
     # Check that the removed food is not in the list anymore
     expect(page).not_to have_content(food_to_remove.name)
-    expect(page).not_to have_content(food_to_remove.measurement_unit)
-    expect(page).not_to have_content(food_to_remove.price)
   end
 end

@@ -24,7 +24,7 @@
           <tr>
             <td><%= food.name %></td>
             <td><%= food.measurement_unit %></td>
-            <td><%= food.price %></td>
+            <td>$<%= food.price %></td>
             <td>
               <%= form_with url: food_path(food), method: :delete do |form| %>
                 <%= form.submit 'Delete Food', class: 'btn btn-danger' %>
