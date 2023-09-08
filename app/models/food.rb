@@ -10,4 +10,8 @@ class Food < ApplicationRecord
   validates :quantity, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
+  def generalinfo
+    "#{name}  --  $#{price} x #{quantity}#{measurement_unit}"
+  end
 end

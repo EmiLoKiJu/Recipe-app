@@ -3,11 +3,11 @@ class RecipesController < ApplicationController
   skip_authorize_resource only: :is_public
 
   def index
-    @recipes = current_user.recipes
+    @recipes = current_user.recipes.includes(:foods)
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.includes(recipe_foods: :food).find(params[:id])
     authorize! :read, @recipe
     @ingredient = RecipeFood.find_by(id: params[:id], recipe: @recipe)
   end
