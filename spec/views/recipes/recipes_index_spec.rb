@@ -1,39 +1,58 @@
 require 'rails_helper'
 
-RSpec.describe 'Recipe Index', type: :system do
-  before(:each) do
-    @user = User.new(name: 'mohamed', email: 'gigiyoyo2001@yahoo.com', encrypted_password: '123456')
-
-    @recipe = Recipe.create(user_id: @user.id, name: 'Pizza', preparation_time: '2', cooking_time: '3',
-                            description: 'Amazing hot pizza')
+RSpec.feature "RecipesIndex", type: :system do
+  # Load the fixture data
+  fixtures :users, :recipes, :foods, :recipe_foods
+  before do
+    # Sign in as the first user
+    user = users(:one)
+    sign_in user
   end
 
-  it 'User should log in' do
-    visit new_user_session_path
-    fill_in 'Email', with: @user.email
-    sleep(2)
-    fill_in 'Password', with: @user.encrypted_password
-    click_button('Log in')
-    sleep(3)
+  scenario 'user visits the recipes index page' do
+    visit recipes_path
+
+    # Check that the page has the correct title
+    expect(page).to have_title('Recipes')
+
+    # Check that the page displays the recipe names and descriptions
+    expect(page).to have_content('Spaghetti Carbonara')
+    expect(page).to have_content('A classic Italian dish made with spaghetti, bacon, eggs, and cheese.')
+
+    # Check that the page has a link to add a new recipe
+    expect(page).to have_link('Add Recipe', href: new_recipe_path)
   end
 
-  it 'User should be able to create a new Recipe' do
-    visit root_path
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.encrypted_password
-    sleep(3)
-    click_button('Log in')
+  scenario 'user clicks on a recipe name' do
+    visit recipes_path
 
-    click_link('recipes')
-    sleep(2)
+    # Click on the first recipe name
+    click_link 'Spaghetti Carbonara'
+
+    # Check that the page redirects to the recipe show page
+    expect(page).to have_current_path(recipe_path(recipes(:one).id))
+  end
+
+  scenario 'user clicks on the remove button' do
+    visit recipes_path
+
+    # Click on the first recipe remove button
+    first(:button, 'Remove').click
+
+    # Check that the page redirects to the recipes index page
+    expect(page).to have_current_path(recipes_path)
+
+    # Check that the recipe is no longer displayed on the page
+    expect(page).not_to have_content('Spaghetti Carbonara')
+  end
+
+  scenario 'user clicks on the add recipe button' do
+    visit recipes_path
+
+    # Click on the add recipe button
     click_link 'Add Recipe'
 
-    fill_in 'Name', with: @recipe.name
-    sleep(3)
-    fill_in 'Preparation time', with: @recipe.preparation_time
-    fill_in 'Cooking time', with: @recipe.cooking_time
-    fill_in 'Description', with: @recipe.description
-    click_button('Add recipe')
-    sleep(3)
+    # Check that the page redirects to the new recipe page
+    expect(page).to have_current_path(new_recipe_path)
   end
 end

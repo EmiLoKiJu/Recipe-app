@@ -3,7 +3,7 @@
     <h1 class="display-4 my-4">Shopping List</h1>
   </header>
   <main class='d-flex justify-content-between'>
-    <span class="fs-5">Total value of food needed: <%= number_to_currency(@shopping_list_value) %></span>
+    <span class="fs-5">Total value of food needed: $<%= @total_value %></span>
   </main>
   <div class="table-responsive shadow-sm rounded my-4">
     <table class="table table-bordered">
@@ -17,9 +17,9 @@
       <tbody>
         <% @shopping_list_items.each_with_index do |ingredient, index| %>
           <tr class="<%= index.even? ? 'bg-white' : 'bg-light' %>">
-            <td><%= ingredient.name %></td>
-            <td><%= ingredient.quantity * ingredient.quantity %> <%= ingredient.measurement_unit %></td>
-            <td><%= number_to_currency(ingredient.quantity * ingredient.price) %></td>
+            <td><%= ingredient.food.name %></td>
+            <td><%= ingredient.quantity %> <%= ingredient.food.measurement_unit %></td>
+            <td><%= number_to_currency(ingredient.quantity*ingredient.food.price/ingredient.food.quantity) %></td>
           </tr>
         <% end %>
       </tbody>

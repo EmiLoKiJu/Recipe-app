@@ -1,36 +1,46 @@
-# spec/features/shopping_list_spec.rb
+RSpec.feature "ShoppingList", type: :system do
+  # Load the fixture data
+  fixtures :users, :recipes, :foods, :recipe_foods
 
-require 'rails_helper'
-
-RSpec.feature 'Shopping List Page' do
   before do
-    # You can set up any necessary data or variables here.
-    @user = User.new(name: 'mohamed', email: 'gigiyoyo2001@yahoo.com', encrypted_password: '123456')
-
-    @recipe = Recipe.create(user_id: @user.id, name: 'Pizza', preparation_time: '2', cooking_time: '3',
-                            description: 'Amazing hot pizza')
+    # Sign in as the first user
+    user = users(:one)
+    sign_in user
   end
 
-  scenario 'User visits the shopping list page' do
-    # Visit the shopping list page
-    visit shopping_lists_path
+  scenario 'user generates a shopping list for a recipe' do
+    # Visit the recipe show page for the first recipe
+    visit recipe_path(recipes(:one).id)
 
-    # Add expectations based on the content of the page
-    expect(page).to have_css('h1', text: 'Shopping List')
-
-    # Replace these expectations with actual values you expect to see on the page
-    expect(page).to have_css('.fs-5', text: 'Total value of food needed:')
-    expect(page).to have_css('.table-responsive')
-    expect(page).to have_css('table.table-bordered')
-
-    # You can add more expectations for table content
-    within('table.table-bordered') do
-      expect(page).to have_css('th', text: 'Food')
-      expect(page).to have_css('th', text: 'Quantity')
-      expect(page).to have_css('th', text: 'Price')
-
-      # You can add expectations for table rows and data here
-      expect(page).to have_css('tr', count: @shopping_list_items.count + 1) # +1 for the header row
+    # Click on the generate shopping list button
+    within('.d-flex.justify-content-between.mb-4') do
+      click_link 'Generate shopping list'
     end
+
+    # Check that the page redirects to the shopping list page
+    expect(page).to have_current_path(general_shopping_list_path(selected_recipe_id: recipes(:one).id))
+
+    # Check that the page has the correct title
+    expect(page).to have_content('Shopping List')
+
+    # Check that the page displays the total value of food needed
+    expect(page).to have_content('Total value of food needed: $1.63')
+
+    # Check that the page displays the correct shopping list items
+    expect(page).to have_content('Spaghetti')
+    expect(page).to have_content('400 grams')
+    expect(page).to have_content('$0.40')
+
+    expect(page).to have_content('Bacon')
+    expect(page).to have_content('150 grams')
+    expect(page).to have_content('$0.60')
+
+    expect(page).to have_content('Eggs')
+    expect(page).to have_content('4 pieces')
+    expect(page).to have_content('$0.13')
+
+    expect(page).to have_content('Cheese')
+    expect(page).to have_content('50 grams')
+    expect(page).to have_content('$0.50')
   end
 end

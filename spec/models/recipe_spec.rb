@@ -1,25 +1,57 @@
 require 'rails_helper'
+
 RSpec.describe Recipe, type: :model do
-  before :each do
-    @user = User.new(name: 'hana', email: 'hana@gmail.com', password: '123456')
-    @recipe = Recipe.new(user: @user, name: 'fish', preparation_time: 35, cooking_time: 20,
-                         description: 'grilled fish', is_public: true)
+  it 'is valid with valid attributes' do
+    recipe = Recipe.new(
+      name: 'Spaghetti Carbonara',
+      preparation_time: 15,
+      cooking_time: 15,
+      description: 'A classic Italian dish made with spaghetti, bacon, eggs, and cheese.',
+      is_public: true,
+      user: User.new
+    )
+    expect(recipe).to be_valid
   end
 
-  context 'Testing Validations' do
-    it 'recipe is valid' do
-      expect(@recipe).to be_valid
-    end
+  it 'is not valid without a name' do
+    recipe = Recipe.new(name: nil)
+    expect(recipe).to_not be_valid
   end
 
-  context 'Testing Associations' do
-    it 'has_many foods' do
-      assoc = Recipe.reflect_on_association(:foods)
-      expect(assoc.macro).to eq :has_many
+  it 'is not valid without a preparation time' do
+    recipe = Recipe.new(preparation_time: nil)
+    expect(recipe).to_not be_valid
+  end
+
+  it 'is not valid without a cooking time' do
+    recipe = Recipe.new(cooking_time: nil)
+    expect(recipe).to_not be_valid
+  end
+
+  it 'is not valid without a description' do
+    recipe = Recipe.new(description: nil)
+    expect(recipe).to_not be_valid
+  end
+
+  it 'is not valid with a negative preparation time' do
+    recipe = Recipe.new(preparation_time: -1)
+    expect(recipe).to_not be_valid
+  end
+
+  it 'is not valid with a negative cooking time' do
+    recipe = Recipe.new(cooking_time: -1)
+    expect(recipe).to_not be_valid
+  end
+
+  describe '#public?' do
+    it 'returns true if the recipe is public' do
+      recipe = Recipe.new(is_public: true)
+      expect(recipe.public?).to be true
     end
-    it 'belongs_to user' do
-      assoc = Recipe.reflect_on_association(:user)
-      expect(assoc.macro).to eq :belongs_to
+
+    it 'returns false if the recipe is not public' do
+      recipe = Recipe.new(is_public: false)
+      expect(recipe.public?).to be false
     end
   end
 end

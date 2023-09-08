@@ -1,0 +1,34 @@
+one:
+  quantity: 400 # grams of spaghetti for recipe one (Spaghetti Carbonara)
+  recipe: one # Spaghetti Carbonara recipe from recipes.yml fixture file.
+  food: one # Spaghetti food from foods.yml fixture file.
+
+two:
+  quantity: 150 # grams of bacon for recipe one (Spaghetti Carbonara)
+  recipe: one
+  food: two
+
+three:
+  quantity: 4 # eggs for recipe one (Spaghetti Carbonara)
+  recipe: one
+  food: three
+
+four:
+  quantity: 50 # grams of cheese for recipe one (Spaghetti Carbonara)
+  recipe: one
+  food: four
+
+five:
+  quantity: 400 # grams of fettuccine for recipe two (Chicken Alfredo)
+  recipe: two # Chicken Alfredo recipe from recipes.yml fixture file.
+  food: five # Fettuccine food from foods.yml fixture file.
+
+six:
+  quantity: 250 # grams of chicken for recipe two (Chicken Alfredo)
+  recipe: two
+  food: six
+
+seven:
+  quantity: 200 # milliliters of Alfredo sauce for recipe two (Chicken Alfredo)
+  recipe: two
+  food: seven
