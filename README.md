@@ -11,7 +11,6 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -98,58 +97,21 @@ bundle install
 ```
 ### Usage
 
-To run the project, execute the following command:
+To run the project, make sure you configured your database correctly, then execute the following command:
 ```sh
-  rails db:drop
   rails db:create
   rails db:migrate
   rails server
 ```
-To fix all Linter error automatically
 run rails server
 Go to the localhost and see it working.
 add /users to see all the users. From then feel free to navigate
 
 ### Run tests
 
-For rails +7, include the following in your gemfile in the development, test group:
-```
-group :development, :test do  
-  gem 'rspec-rails'
-end
-```
-and 
-
-```
-gem 'rails-controller-testing'
-```
-
-then run: 
-```
-bundle install
-```
-
-To setup rspec, run the following:
-
-```
-rails generate rspec:install
-```
-
-
-To run the project tests, execute the following command:
-
-```
-rspec
-```
-
-If you haven't migrated your yml files in the fixtures folder to your database, you can run the following commands to do it:
-
-rails db:test:prepare
-rails db:fixtures:load RAILS_ENV=test
-
-### Deployment
-
-No deployment implemented yet
+First, migrate the database for the test environment:
+rails db:migrate RAILS_ENV=test
+then run the command "rspec" in the terminal to run all the spec files in the repository
 
 <p align="right">(<a href="#recipe-app">back to top</a>)</p>
 
@@ -236,4 +198,3 @@ If you like this project give it a star ⭐️
 ## 📝 License <a name="license"></a>
 
 This project is [MIT](./LICENSE) licensed.
-
