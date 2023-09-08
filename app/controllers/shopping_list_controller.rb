@@ -12,6 +12,7 @@ class ShoppingListController < ApplicationController
         value.round(2)
       end
     else
+      flash[:alert] = 'You have not selected any recipe yet'
       @shopping_list_items = []
     end
   end
