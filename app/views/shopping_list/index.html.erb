@@ -3,7 +3,11 @@
     <h1 class="display-4 my-4">Shopping List</h1>
   </header>
   <main class='d-flex justify-content-between'>
-    <span class="fs-5">Total value of food needed: $<%= @total_value %></span>
+    <% if @total_value == 0 && @recipe.present? %>
+      <span class="fs-5">You have all the required ingredients for this recipe!</span>
+    <% else %>
+      <span class="fs-5">Total value of food needed: $<%= @total_value %></span>
+    <% end %>
   </main>
   <div class="table-responsive shadow-sm rounded my-4">
     <table class="table table-bordered">

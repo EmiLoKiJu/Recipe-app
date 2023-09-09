@@ -12,12 +12,26 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new(food_params)
-    @food.user = current_user
-    if @food.save
-      redirect_to foods_path, notice: 'Food was successfully created.'
+    existing_food = current_user.foods.find_by(name: food_params[:name].strip.capitalize)
+    if existing_food
+      existing_food.quantity += food_params[:quantity].to_f
+      existing_food.price = food_params[:price].to_f
+      if existing_food.save
+        redirect_to foods_path, notice: 'Quantity added to existing food.'
+      else
+        render :new
+      end
     else
-      render :new
+      # If no existing food with the same name is found, create a new one
+      @food = Food.new(food_params)
+      @food.name = @food.name.strip.capitalize
+      @food.measurement_unit = @food.measurement_unit.strip.capitalize
+      @food.user = current_user
+      if @food.save
+        redirect_to foods_path, notice: 'Food was successfully created.'
+      else
+        render :new
+      end
     end
   end
 

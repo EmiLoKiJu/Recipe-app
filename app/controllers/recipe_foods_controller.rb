@@ -1,4 +1,5 @@
 class RecipeFoodsController < ApplicationController
+  before_action :check_recipe_ownership, only: [:new]
   def new
     @recipe_food = RecipeFood.new
     @recipe_food.recipe_id = params[:recipe_id]
@@ -6,28 +7,36 @@ class RecipeFoodsController < ApplicationController
 
   def create
     @recipe_food = RecipeFood.new(recipe_food_params)
-    if @recipe_food.save
-      redirect_to @recipe_food.recipe, notice: 'Food added to recipe successfully.'
-    else
-      puts @recipe_food.errors.full_messages
-      redirect_to new_recipe_food_path
+    recipe = Recipe.find(@recipe_food.recipe_id)
+    if can?(:manage, recipe)
+      if @recipe_food.save
+        redirect_to @recipe_food.recipe, notice: 'Food added to recipe successfully.'
+      else
+        puts @recipe_food.errors.full_messages
+        redirect_to new_recipe_food_path
+      end
     end
   end
 
   def destroy
-    authorize! :destroy, @recipe_food
-    @recipe_food = RecipeFood.find(params[:id])
-    recipe_id = @recipe_food.recipe_id
-    if @recipe_food.destroy
-      redirect_to recipe_path(recipe_id), notice: 'Food deleted successfully.'
-    else
-      puts @recipe_food.errors.full_messages
-      redirect_to recipe_path(recipe_id), alert: 'Failed to delete food.'
+    if can?(:manage, @recipe_food.recipe)
+      @recipe_food = RecipeFood.find(params[:id])
+      recipe_id = @recipe_food.recipe_id
+      if @recipe_food.destroy
+        redirect_to recipe_path(recipe_id), notice: 'Food deleted successfully.'
+      else
+        puts @recipe_food.errors.full_messages
+        redirect_to recipe_path(recipe_id), alert: 'Failed to delete food.'
+      end
     end
   end
 
   def edit
-    @recipe_food = RecipeFood.find(params[:id])
+    if can?(:manage, @recipe_food.recipe)
+      @recipe_food = RecipeFood.find(params[:id])
+    else
+      redirect_to root_path, alert: 'You do not have permission to edit this food in the recipe.'
+    end
   end
 
   def update
@@ -40,6 +49,13 @@ class RecipeFoodsController < ApplicationController
   end
 
   private
+
+  def check_recipe_ownership
+    recipe = Recipe.find(params[:recipe_id])
+    unless can?(:manage, recipe)
+      redirect_to root_path, alert: 'You do not have permission to add food to this recipe.'
+    end
+  end
 
   def recipe_food_params
     params.require(:recipe_food).permit(:food_id, :quantity, :recipe_id)

@@ -22,7 +22,7 @@ RSpec.feature 'New Food Form', type: :system do
     click_button 'Create Food'
 
     # Check that the page displays the newly created food details
-    expect(page).to have_content('New Food Name')
+    expect(page).to have_content('Food was successfully created.')
     expect(page).to have_content('Grams')
     expect(page).to have_content('$5.99')
   end

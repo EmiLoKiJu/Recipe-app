@@ -28,7 +28,9 @@
       class: 'btn btn-primary',
       if: can?(:manage, @recipe)
     %>
-    <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary" %>
+    <% if can?(:manage, @recipe) %>
+      <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary" %>
+    <% end %>
   </div>
 
   <div class="table-responsive">
@@ -38,7 +40,9 @@
           <th scope="col">Food</th>
           <th scope="col">Quantity</th>
           <th scope="col">Value</th>
-          <th scope="col">Actions</th>
+          <% if can?(:manage, @recipe) %>
+            <th scope="col">Actions</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
@@ -46,13 +50,15 @@
           <tr>
             <td><%= ingredient.food.name %></td>
             <td><%= ingredient.quantity %></td>
-            <td><%= (ingredient.quantity * ingredient.food.price / ingredient.food.quantity).round(2) %></td>
-            <td class="dflex">
-              <%= link_to 'Edit', edit_recipe_food_path(ingredient), class: 'btn btn-primary mx-8' %>
-              <%= form_with url: delete_recipe_food_path(ingredient), method: :delete do |form| %>
-                <%= form.submit 'Remove', data: { confirm: 'Are you sure you want to delete this food?' }, class: 'btn btn-danger' %>
-              <% end %>
-            </td>
+            <td><%= ingredient.quantity * ingredient.food.price %></td>
+            <% if can?(:manage, @recipe) %>
+              <td class="dflex">
+                <%= link_to 'Edit', edit_recipe_food_path(ingredient), class: 'btn btn-primary mx-8' %>
+                <%= form_with url: delete_recipe_food_path(ingredient), method: :delete do |form| %>
+                  <%= form.submit 'Remove', data: { confirm: 'Are you sure you want to delete this food?' }, class: 'btn btn-danger' %>
+                <% end %>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
