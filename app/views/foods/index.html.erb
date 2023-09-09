@@ -1,0 +1,42 @@
+<section id='food-list' class="container my-4">
+  <% if @foods.empty? %>
+    <div class='text-center'>
+      <h1 class="text-3xl font-bold my-8">Hello! We don't have any food!</h1>
+    </div>
+    <div class="text-center d-flex justify-content-center my-4">
+      <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary ml-5 float-right mb-5' %>
+    </div>
+  <% else %>
+    <div class="text-center d-flex justify-content-end my-4">
+      <%= link_to 'Add Food', new_food_path, class: 'btn btn-primary ml-5 float-right mb-5' %>
+    </div>
+  <%# end %>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr class="bg-primary text-white">
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Measurement Unit</th>
+          <th scope="col">Unit Price</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @foods.each do |food| %>
+          <tr>
+            <td><%= food.name %></td>
+            <td><%= food.quantity %></td>
+            <td><%= food.measurement_unit %></td>
+            <td>$<%= food.price %></td>
+            <td>
+              <%= form_with url: food_path(food), method: :delete do |form| %>
+                <%= form.submit 'Delete Food', class: 'btn btn-danger' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</section>

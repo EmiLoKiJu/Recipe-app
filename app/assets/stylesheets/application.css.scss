@@ -1,0 +1,91 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* app/assets/stylesheets/application.scss */
+
+@import 'bootstrap';
+@import 'tailwind';
+@import 'font-awesome';
+
+body {
+  overflow-y: auto;
+}
+
+nav {
+  margin: 8px 1%;
+}
+
+.new_user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mb-2,
+.form1 {
+  align-items: center;
+}
+
+.mx-8 {
+  margin: 0 8px 0 0;
+}
+
+.dflex {
+  display: flex;
+}
+
+.flexcol {
+  flex-direction: column;
+}
+
+.spacebetween {
+  justify-content: space-between;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.alert-notice {
+  margin: 0 2%;
+}
+
+.m16 {
+  margin: 16px 0;
+}
+
+.box1 {
+  margin: 16px 0;
+  width: 20%;
+  text-align: center;
+}
+
+.box2 {
+  width: 70%;
+  margin: 16px 0;
+}
+
+.box3 {
+  width: 70%;
+  margin: 20px 0;
+}
+
+.title1 {
+  font-size: 26px;
+  font-weight: bold;
+}

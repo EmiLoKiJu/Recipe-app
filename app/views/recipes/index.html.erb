@@ -1,0 +1,20 @@
+<section id='recipes' class="flex flex-col justify-center bg-gray-100">
+  <div class="flex flex-col items-center">
+    <% @recipes.each do |recipe| %>
+      <div class="max-w-4xl w-11/12 m-4 p-6 bg-white border border-gray-200 rounded-lg shadow">
+        <div class="space-y-4 dflex spacebetween">
+          <div class="box1">
+            <%= link_to recipe_path(recipe) do %>
+              <p class="mb-3 text-gray-700"><%= recipe.name %></p>
+            <% end %>
+            <%= button_to 'Remove', recipe_path(recipe), method: :delete, class: "btn btn-danger" %>
+          </div>
+          <p class="mb-3 text-gray-700 box2"><%= recipe.description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="text-center my-8">
+    <%= link_to 'Add Recipe', new_recipe_path, class: "btn btn-success"  %>
+  </div>
+</section>

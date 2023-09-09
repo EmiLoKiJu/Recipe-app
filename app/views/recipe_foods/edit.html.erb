@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-3xl font-bold mb-4 text-center">Edit ingredient quantity</h2>
+        </div>
+        <div class="card-body">
+          <%= form_with(model: @recipe_food, url: recipe_food_path(@recipe_food), method: :patch, class: 'edit-recipe-food-form') do |form| %>
+            <div class="mb-3 dflex spacebetween">
+              <%= @recipe_food.food.name %>:  <%= form.label :quantity, class: 'form-label' %> <%= form.number_field :quantity, class: 'quantity-placeholder' %><%= @recipe_food.food.measurement_unit %>
+            </div>
+            <div class="text-center">
+              <%= form.submit 'Update Quantity', class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

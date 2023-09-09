@@ -1,0 +1,44 @@
+<section id='new-recipe' class="container mx-auto px-4 mt-5">
+  <%= form_with model: recipe, class: "max-w-3xl w-3/4 p-4 bg-light rounded shadow" do |form| %>
+    <% if recipe.errors.any? %>
+      <div class="alert alert-danger">
+        <h4 class="text-danger"><%= pluralize(recipe.errors.count, 'error') %> prohibited this object from being saved:</h4>
+        <ul>
+          <% recipe.errors.full_messages.each do |message| %>
+            <li class="text-danger"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label text-gray-700" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :preparation_time, class: "form-label text-gray-700" %>
+      <%= form.text_field :preparation_time, class: "form-control", placeholder: "hours" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :cooking_time, class: "form-label text-gray-700" %>
+      <%= form.text_field :cooking_time, class: "form-control", placeholder: "hours" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label text-gray-700" %>
+      <%= form.text_field :description, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :is_public, class: "form-label text-gray-700" %><br>
+      <div class="form-check form-check-inline">
+        <%= form.label :is_public_true, "Yes", class: "form-check-label mr-2", for: "recipe_public_true" %>
+        <%= form.radio_button :is_public, true, checked: true, class: "form-check-input", id: "recipe_public_true" %>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.label :is_public_false, "No", class: "form-check-label mr-2", for: "recipe_public_false" %>
+        <%= form.radio_button :is_public, false, class: "form-check-input", id: "recipe_public_false" %>
+      </div>
+    </div>
+    <div>
+      <%= form.submit "Add recipe", class: "btn btn-primary btn-lg" %>
+    </div>
+  <% end %>
+</section>

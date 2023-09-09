@@ -1,0 +1,34 @@
+<section id='shopping-list' class="container mx-auto px-4">
+  <header class='text-center'>
+    <h1 class="display-4 my-4">Shopping List</h1>
+  </header>
+  <main class='d-flex justify-content-between'>
+    <% if @total_value == 0 && @recipe.present? %>
+      <span class="fs-5">You have all the required ingredients for this recipe!</span>
+    <% else %>
+      <span class="fs-5">Total value of food needed: $<%= @total_value %></span>
+      <span class="fs-5">Total food missing: <%= @shopping_list_items.length %></span>
+    <% end %>
+  </main>
+  <div class="table-responsive shadow-sm rounded my-4">
+    <table class="table table-bordered">
+      <thead class="bg-light">
+        <tr>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shopping_list_items.each_with_index do |ingredient, index| %>
+          <% recipe_food, difference = ingredient %>
+          <tr class="<%= index.even? ? 'bg-white' : 'bg-light' %>">
+            <td><%= recipe_food.food.name %></td>
+            <td><%= difference %> <%= recipe_food.food.measurement_unit %></td>
+            <td>$<%= difference * recipe_food.food.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

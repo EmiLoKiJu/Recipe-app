@@ -1,0 +1,39 @@
+<div class='text-center'>
+  <h1 class="text-3xl font-bold my-4">Public Recipes</h1>
+</div>
+<% if @public_recipes.empty? %>
+  <div class='text-center'>
+    <h1 class="text-3xl font-bold my-8">Hello! We don't have any recipes yet!</h1>
+    <p class='mb-5'>Please be the first to create one!</p>
+    <% if current_user %>
+      <%= link_to 'Create a recipe', new_recipe_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="flex flex-col items-center">
+    <% @public_recipes.each do |recipe| %>
+      <div class="max-w-4xl w-11/12 m-4 p-6 bg-white border border-gray-200 rounded-lg shadow">
+        <div class="space-y-4 dflex spacebetween">
+          <div class="box1">
+            <%= link_to recipe_path(recipe) do %>
+              <div class="title1"><%= recipe.name %></div>
+            <% end %>
+            By: <%= recipe.user.name %>
+          </div>
+          <div class="box3">
+            <div>
+              <span>Total food items:</span>
+              <span><%= recipe.foods.length %></span>
+            </div>
+            <div>
+              <span>Total price:</span>
+              <span class="text-green-500">$<%= @totals[recipe.id] %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

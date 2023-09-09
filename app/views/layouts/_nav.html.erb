@@ -1,0 +1,30 @@
+<nav class="bg-gray-800">
+  <% if current_user %>
+    <div class='dflex spacebetween'>
+      <div>
+        <%= link_to 'Foods', foods_path, class: 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+        <%= link_to 'Recipes', recipes_path, class: 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+        <%= link_to 'Public Recipes', public_recipes_path, class: 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+        <%= link_to 'Generate shopping list',
+          general_shopping_list_path,
+          id: 'generate-shopping-list',
+          class: 'bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded',
+          if: can?(:manage, @recipe)
+        %>
+      </div>
+      <div>
+        <%= link_to "Sign Out", custom_destroy_user_session_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+      </div>
+    </div>
+  <% else %>
+    <%= link_to "Log in", new_user_session_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+  <% end %>
+</nav>
+<script>
+  document.getElementById('generate-shopping-list').addEventListener('click', function(event) {
+    event.preventDefault();
+    const selectedRecipeId = localStorage.getItem('selectedRecipeId');
+    if (selectedRecipeId != null) this.href += '?selected_recipe_id=' + selectedRecipeId;
+    window.location.href = this.href;
+  });
+</script>

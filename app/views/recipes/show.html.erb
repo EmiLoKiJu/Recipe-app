@@ -1,0 +1,75 @@
+<section id='recipe' class="container mx-auto px-4">
+  <header class='text-center'>
+    <h1 class="text-3xl font-bold my-4">Recipe <%= @recipe.name %></h1>
+  </header>
+  <main class='recipe'>
+    <div class="card mb-4">
+      <div class="card-body">
+        <p class="card-text">Preparation time: <%= @recipe.preparation_time %> hours</p>
+        <p class="card-text">Cooking time: <%= @recipe.cooking_time %> hours</p>
+        <p class="card-text"><%= @recipe.description %></p>
+      </div>
+    </div>
+    <div class="text-center mb-4">
+      <% if can?(:manage, @recipe) %>
+        <% if @recipe.is_public %>
+          <%= link_to "Unpublish", publish_recipe_path(@recipe), method: :post, class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to "Publish", publish_recipe_path(@recipe), method: :post, class: "btn btn-success" %>
+        <% end %>
+      <% end %>
+    </div>
+  </main>
+  <div class="d-flex justify-content-between mb-4">
+    <%= link_to 'Generate shopping list',
+      general_shopping_list_path,
+      id: 'generate-shopping-list-2',
+      data: { recipe_id: @recipe.id },
+      class: 'btn btn-primary',
+      if: can?(:manage, @recipe)
+    %>
+    <% if can?(:manage, @recipe) %>
+      <%= link_to 'Add ingredient', new_recipe_food_path(recipe_id: @recipe.id), class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Value</th>
+          <% if can?(:manage, @recipe) %>
+            <th scope="col">Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe.recipe_foods.each do |ingredient| %>
+          <tr>
+            <td><%= ingredient.food.name %></td>
+            <td><%= ingredient.quantity %></td>
+            <td><%= ingredient.quantity * ingredient.food.price %></td>
+            <% if can?(:manage, @recipe) %>
+              <td class="dflex">
+                <%= link_to 'Edit', edit_recipe_food_path(ingredient), class: 'btn btn-primary mx-8' %>
+                <%= form_with url: delete_recipe_food_path(ingredient), method: :delete do |form| %>
+                  <%= form.submit 'Remove', data: { confirm: 'Are you sure you want to delete this food?' }, class: 'btn btn-danger' %>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+<script>
+  document.getElementById('generate-shopping-list-2').addEventListener('click', function(event) {
+    event.preventDefault();
+    const recipeId = this.getAttribute('data-recipe-id');
+    localStorage.setItem('selectedRecipeId', recipeId);
+    window.location.href = this.href + '?selected_recipe_id=' + recipeId;
+  });
+</script>
