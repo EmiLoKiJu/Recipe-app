@@ -9,6 +9,8 @@ gem 'rails', '~> 7.0.7', '>= 7.0.7.2'
 # Devise added to project by EmiLoKiJu
 gem 'devise', '~> 4.9'
 
+gem 'sqlite3'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
