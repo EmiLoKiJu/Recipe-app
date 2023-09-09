@@ -6,7 +6,6 @@
       true,
       {
         "ignoreAtRules": [
-          "tailwind",
           "apply",
           "variants",
           "responsive",
@@ -18,7 +17,6 @@
       true,
       {
         "ignoreAtRules": [
-          "tailwind",
           "apply",
           "variants",
           "responsive",
