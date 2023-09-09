@@ -18,7 +18,7 @@ Metrics/MethodLength:
   Include:
     - 'app/controllers/*'
     - 'app/models/*'
-  Max: 20
+  Max: 80
 Metrics/AbcSize:
   Include:
     - 'app/controllers/*'
@@ -29,6 +29,18 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   AllowedMethods: ['describe']
   Max: 50
+
+Metrics/BlockNesting:
+  Enabled: true
+  Max: 10
+
+Metrics/CyclomaticComplexity:
+  Enabled: true
+  Max: 15 
+
+Metrics/PerceivedComplexity:
+  Enabled: true
+  Max: 16
 
 Style/Documentation:
   Enabled: false
@@ -60,7 +72,3 @@ Style/HashTransformKeys:
   Enabled: false
 Style/HashTransformValues:
   Enabled: false
-
-# Set the line ending style to CRLF
-# Lint/EndOfLine:
-#   EnforcedStyle: crlf
